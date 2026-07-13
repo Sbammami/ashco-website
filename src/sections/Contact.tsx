@@ -25,7 +25,6 @@ const Contact = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [referenceId, setReferenceId] = useState<string | null>(null);
 
   const contactInfo = [
     {
@@ -116,19 +115,23 @@ const Contact = () => {
     setError(null);
 
     try {
-      const response = await fetch('/api/contact', {
+      const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formState),
+        body: JSON.stringify({
+          access_key: import.meta.env.VITE_WEB3FORMS_ACCESS_KEY,
+          subject: 'New inquiry from ashcoenergy.com',
+          from_name: 'ASHCO Energy Website',
+          ...formState,
+        }),
       });
 
       const data = await response.json();
 
-      if (!response.ok) {
+      if (!response.ok || !data.success) {
         throw new Error(data.message || 'Something went wrong. Please try again.');
       }
 
-      setReferenceId(data.referenceId);
       setIsSubmitted(true);
       setFormState({ name: '', email: '', phone: '', message: '', service: '' });
     } catch (err: any) {
@@ -232,13 +235,8 @@ const Contact = () => {
                 <p className="font-body text-sm text-gray-600 mb-3">
                   We'll get back to you within 24 hours.
                 </p>
-                {referenceId && (
-                  <div className="inline-flex items-center gap-2 bg-ashco-green/10 text-ashco-green text-xs font-body font-semibold px-4 py-2 rounded-full">
-                    Reference: {referenceId}
-                  </div>
-                )}
                 <button
-                  onClick={() => { setIsSubmitted(false); setReferenceId(null); }}
+                  onClick={() => setIsSubmitted(false)}
                   className="mt-6 font-body text-sm text-ashco-green underline hover:text-ashco-green-dark"
                 >
                   Send another message
@@ -338,9 +336,6 @@ const Contact = () => {
                   )}
                 </Button>
 
-                <p className="font-body text-xs text-gray-400 text-center">
-                  Powered by <span className="text-ashco-green font-semibold">ASHCO Energy API</span> · NestJS
-                </p>
               </form>
             )}
           </div>
