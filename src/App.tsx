@@ -1,49 +1,69 @@
-import { useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import './App.css';
+import { BrowserRouter, Routes, Route, useLocation, Link } from 'react-router-dom';
+import { useEffect } from 'react';
+import { AuthProvider, useAuth } from './lib/auth';
+import Landing from './pages/Landing';
+import Order from './pages/Order';
+import Login from './pages/Login';
+import Account from './pages/Account';
+import Admin from './pages/Admin';
+import Team from './pages/Team';
 
-// Import sections
-import Navigation from './sections/Navigation';
-import Hero from './sections/Hero';
-import About from './sections/About';
-import Services from './sections/Services';
-import VisionMission from './sections/VisionMission';
-import Projects from './sections/Projects';
-import Clients from './sections/Clients';
-import Contact from './sections/Contact';
-import Footer from './sections/Footer';
-
-// Register GSAP plugins
-gsap.registerPlugin(ScrollTrigger);
-
-function App() {
-  const mainRef = useRef<HTMLDivElement>(null);
-
+// Scroll to top whenever the route changes
+function ScrollToTop() {
+  const { pathname } = useLocation();
   useEffect(() => {
-    // Initialize scroll-triggered animations
-    const ctx = gsap.context(() => {
-      // Refresh ScrollTrigger on load
-      ScrollTrigger.refresh();
-    }, mainRef);
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+}
 
-    return () => ctx.revert();
-  }, []);
+// Small floating nav shown ONLY to admins/owners, on every page.
+// Owners see the Team link; everyone with admin access sees the shop admin.
+function StaffNav() {
+  const { ready, isAdmin, isOwner } = useAuth();
+  const { pathname } = useLocation();
+  if (!ready || !isAdmin) return null;
 
   return (
-    <div ref={mainRef} className="relative min-h-screen bg-white overflow-x-hidden">
-      <Navigation />
-      <main>
-        <Hero />
-        <About />
-        <Services />
-        <VisionMission />
-        <Projects />
-        <Clients />
-        <Contact />
-      </main>
-      <Footer />
+    <div className="fixed bottom-4 right-4 z-50 flex gap-2 rounded-full bg-ashco-black/90 backdrop-blur px-3 py-2 shadow-lg">
+      <Link
+        to="/admin"
+        className={`rounded-full px-3 py-1 text-sm font-semibold ${
+          pathname === '/admin' ? 'bg-ashco-yellow text-ashco-black' : 'text-white'
+        }`}
+      >
+        Shop
+      </Link>
+      {isOwner && (
+        <Link
+          to="/team"
+          className={`rounded-full px-3 py-1 text-sm font-semibold ${
+            pathname === '/team' ? 'bg-ashco-yellow text-ashco-black' : 'text-white'
+          }`}
+        >
+          Team
+        </Link>
+      )}
     </div>
+  );
+}
+
+function App() {
+  return (
+    <AuthProvider>
+      <BrowserRouter>
+        <ScrollToTop />
+        <Routes>
+          <Route path="/" element={<Landing />} />
+          <Route path="/order" element={<Order />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/account" element={<Account />} />
+          <Route path="/admin" element={<Admin />} />
+          <Route path="/team" element={<Team />} />
+        </Routes>
+        <StaffNav />
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
 

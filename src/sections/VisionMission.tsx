@@ -32,14 +32,6 @@ const VisionMission = () => {
         }
       );
 
-      // Continuous rotation
-      gsap.to(centerRef.current, {
-        rotation: 360,
-        duration: 60,
-        repeat: -1,
-        ease: 'none',
-      });
-
       // Vision card animation
       gsap.fromTo(
         visionRef.current,
@@ -212,21 +204,22 @@ const VisionMission = () => {
             {/* Center Graphic */}
             <div ref={centerRef} className="flex justify-center py-8 lg:py-0">
               <div className="relative w-48 h-48">
-                {/* Outer Ring */}
+                {/* Outer Ring — spins slowly */}
                 <div className="absolute inset-0 rounded-full border-4 border-dashed border-ashco-green/30 animate-spin" style={{ animationDuration: '20s' }} />
-                
-                {/* Middle Ring */}
-                <div className="absolute inset-4 rounded-full border-2 border-ashco-yellow/50" />
-                
-                {/* Center Logo */}
-                <div className="absolute inset-6 rounded-full bg-white shadow-xl flex items-center justify-center overflow-hidden">
-                  <img
-                    src="/logo.png"
-                    alt="Ashco Energy Logo"
-                    className="w-24 h-24 object-contain"
-                  />
+
+                {/* Middle Ring — spins the other way */}
+                <div className="absolute inset-4 rounded-full border-2 border-ashco-yellow/50 animate-spin" style={{ animationDuration: '30s', animationDirection: 'reverse' }} />
+
+                {/* Center — ASHCO wordmark on green, crisp */}
+                <div className="absolute inset-6 rounded-full bg-ashco-green shadow-xl flex flex-col items-center justify-center text-center">
+                  <span className="font-display font-extrabold text-white text-2xl tracking-tight leading-none">
+                    ASHCO
+                  </span>
+                  <span className="font-body text-ashco-yellow text-[10px] font-semibold mt-1">
+                    We keep you going
+                  </span>
                 </div>
-                
+
                 {/* Orbiting Dots */}
                 <div className="absolute inset-0 animate-spin" style={{ animationDuration: '10s' }}>
                   <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-ashco-yellow" />

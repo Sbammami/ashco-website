@@ -154,3 +154,11 @@
   outline: 2px solid var(--ashco-green);
   outline-offset: 2px;
 }
+
+/* ---- Order app form controls ---- */
+@layer components {
+  .input-base {
+    @apply w-full border-2 border-gray-200 rounded-xl px-4 py-3 text-ashco-black
+           placeholder:text-gray-400 focus:border-ashco-green outline-none transition-colors;
+  }
+}

@@ -1,8 +1,11 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, Phone } from 'lucide-react';
+import { Menu, X, Phone, Truck, User } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
+import { useAuth } from '@/lib/auth';
 
 const Navigation = () => {
+  const { userId } = useAuth();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -51,12 +54,30 @@ const Navigation = () => {
               }}
               className="flex items-center gap-3 group"
             >
-              <div className="relative w-12 h-12 transition-transform duration-300 group-hover:scale-110">
+              <div className="relative w-16 h-16 transition-all duration-300 group-hover:scale-105">
                 <img
                   src="/logo.png"
                   alt="Ashco Energy Logo"
-                  className="w-full h-full object-contain"
+                  className={`w-full h-full object-contain transition-all duration-300 ${
+                    isScrolled ? '' : 'drop-shadow-[0_2px_8px_rgba(255,255,255,0.5)]'
+                  }`}
                 />
+              </div>
+              <div className="leading-none">
+                <div
+                  className={`font-display font-extrabold text-xl sm:text-2xl tracking-tight transition-colors duration-300 ${
+                    isScrolled ? 'text-ashco-green' : 'text-white'
+                  }`}
+                >
+                  ASHCO ENERGY
+                </div>
+                <div
+                  className={`text-xs font-semibold tracking-wide transition-colors duration-300 ${
+                    isScrolled ? 'text-ashco-yellow-dark' : 'text-ashco-yellow'
+                  }`}
+                >
+                  We keep you going
+                </div>
               </div>
             </a>
 
@@ -85,19 +106,39 @@ const Navigation = () => {
             </div>
 
             {/* CTA Button */}
-            <div className="hidden lg:flex items-center gap-4">
-              <a href="tel:09055000086">
+            <div className="hidden lg:flex items-center gap-3">
+              <Link to={userId ? '/account' : '/login'}>
                 <Button
+                  variant="ghost"
                   className={`font-body font-semibold text-sm tracking-wide transition-all duration-300 ${
                     isScrolled
-                      ? 'bg-ashco-green text-white hover:bg-ashco-green-dark'
-                      : 'bg-ashco-yellow text-ashco-black hover:bg-ashco-yellow-dark'
+                      ? 'text-ashco-green hover:bg-ashco-green/10'
+                      : 'text-white hover:bg-white/10'
+                  }`}
+                >
+                  <User className="w-4 h-4 mr-2" />
+                  {userId ? 'Account' : 'Login'}
+                </Button>
+              </Link>
+              <a href={`tel:${'09055000086'}`}>
+                <Button
+                  variant="ghost"
+                  className={`font-body font-semibold text-sm tracking-wide transition-all duration-300 ${
+                    isScrolled
+                      ? 'text-ashco-green hover:bg-ashco-green/10'
+                      : 'text-white hover:bg-white/10'
                   }`}
                 >
                   <Phone className="w-4 h-4 mr-2" />
                   Call Us
                 </Button>
               </a>
+              <Link to="/order">
+                <Button className="bg-ashco-yellow text-ashco-black hover:bg-ashco-yellow-dark font-body font-bold text-sm tracking-wide transition-all duration-300 hover:shadow-glow-yellow">
+                  <Truck className="w-4 h-4 mr-2" />
+                  Order Now
+                </Button>
+              </Link>
             </div>
 
             {/* Mobile Menu Button */}
@@ -144,11 +185,22 @@ const Navigation = () => {
               {link.name}
             </a>
           ))}
-          <a href="tel:09055000086" className="mt-8">
-            <Button className="bg-ashco-yellow text-ashco-black hover:bg-ashco-yellow-dark font-body font-semibold text-lg px-8 py-6">
-              <Phone className="w-5 h-5 mr-2" />
-              0905 5000 086
+          <Link to="/order" className="mt-8" onClick={() => setIsMobileMenuOpen(false)}>
+            <Button className="bg-ashco-yellow text-ashco-black hover:bg-ashco-yellow-dark font-body font-bold text-lg px-8 py-6">
+              <Truck className="w-5 h-5 mr-2" />
+              Order Fuel Now
             </Button>
+          </Link>
+          <Link
+            to={userId ? '/account' : '/login'}
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="inline-flex items-center gap-2 text-white font-display text-xl font-semibold hover:text-ashco-yellow transition-colors"
+          >
+            <User className="w-5 h-5" />
+            {userId ? 'My Account' : 'Login / Sign up'}
+          </Link>
+          <a href="tel:09055000086" className="text-white/80 font-body font-medium">
+            or call {`0905 5000 086`}
           </a>
         </div>
       </div>

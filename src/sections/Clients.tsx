@@ -15,10 +15,6 @@ const Clients = () => {
     { name: 'BlueSea Services Ltd', initials: 'BS' },
     { name: 'QUBEESH Integrated', initials: 'QI' },
     { name: 'NDLEA', initials: 'ND' },
-    { name: 'TAJBank', initials: 'TB' },
-    { name: 'ConOil Ltd', initials: 'CO' },
-    { name: 'Mobil Ltd', initials: 'ML' },
-    { name: 'A.A Rano', initials: 'AR' },
     { name: 'Shettima Imam', initials: 'SI' },
   ];
 

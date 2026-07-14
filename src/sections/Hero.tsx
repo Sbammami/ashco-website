@@ -1,7 +1,8 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ArrowRight, Fuel } from 'lucide-react';
+import { ArrowRight, Fuel, Truck } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -93,9 +94,9 @@ const Hero = () => {
   };
 
   const headingLines = [
-    'DISCOVER HOW WE ARE',
-    'HARNESSING ENERGY TO',
-    'IGNITING PERFORMANCE',
+    'DOORSTEP DIESEL.',
+    'WE KEEP',
+    'YOU GOING.',
   ];
 
   return (
@@ -131,7 +132,7 @@ const Hero = () => {
             <div className="inline-flex items-center gap-2 bg-ashco-yellow/20 backdrop-blur-sm border border-ashco-yellow/40 rounded-full px-4 py-2 mb-8">
               <Fuel className="w-4 h-4 text-ashco-yellow" />
               <span className="font-body text-sm font-medium text-white tracking-wide">
-                Premium Fuel Solutions
+                Fuel delivered to your doorstep
               </span>
             </div>
 
@@ -154,27 +155,29 @@ const Hero = () => {
 
             {/* Subheading */}
             <p className="font-body text-lg sm:text-xl text-white/90 max-w-xl mb-10 leading-relaxed font-light">
-              We supply more than just fuel — we supply it fast and quick. Your
-              trusted partner for bulk diesel solutions across Nigeria.
+              Order diesel, petrol and kerosene by the litre and we deliver
+              straight to your site — fast, flat-rate, and with loyalty
+              discounts for returning customers.
             </p>
 
             {/* CTA Buttons */}
             <div ref={ctaRef} className="flex flex-wrap gap-4">
+              <Link to="/order">
+                <Button
+                  className="bg-ashco-yellow text-ashco-black hover:bg-ashco-yellow-dark font-body font-semibold text-base px-8 py-6 rounded-md transition-all duration-300 hover:shadow-glow-yellow group"
+                >
+                  <Truck className="w-5 h-5 mr-2" />
+                  Order Fuel Now
+                  <ArrowRight className="w-5 h-5 ml-2 transition-transform duration-300 group-hover:translate-x-1" />
+                </Button>
+              </Link>
               <Button
                 onClick={scrollToServices}
-                className="bg-ashco-yellow text-ashco-black hover:bg-ashco-yellow-dark font-body font-semibold text-base px-8 py-6 rounded-md transition-all duration-300 hover:shadow-glow-yellow group"
+                variant="outline"
+                className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-ashco-green font-body font-semibold text-base px-8 py-6 rounded-md transition-all duration-300"
               >
-                Explore Solutions
-                <ArrowRight className="w-5 h-5 ml-2 transition-transform duration-300 group-hover:translate-x-1" />
+                See What We Do
               </Button>
-              <a href="#contact">
-                <Button
-                  variant="outline"
-                  className="border-2 border-white text-white hover:bg-white hover:text-ashco-green font-body font-semibold text-base px-8 py-6 rounded-md transition-all duration-300"
-                >
-                  Contact Us
-                </Button>
-              </a>
             </div>
 
             {/* Stats */}

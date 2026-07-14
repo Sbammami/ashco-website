@@ -25,12 +25,14 @@ const Contact = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [referenceId, setReferenceId] = useState<string | null>(null);
 
   const contactInfo = [
     {
       icon: MapPin,
       title: 'Address',
-      content: 'Dantata & Sawoe Yard, Murtala Mohammed Expressway, Gudu, Abuja.',
+      content:
+        '02 Otunba Kayode Oke Close, Off Udo Udoma Street, Cadastral Zone AO4, Asokoro District, Abuja, FCT.',
     },
     {
       icon: Phone,
@@ -115,23 +117,25 @@ const Contact = () => {
     setError(null);
 
     try {
-      const response = await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          access_key: import.meta.env.VITE_WEB3FORMS_ACCESS_KEY,
-          subject: 'New inquiry from ashcoenergy.com',
-          from_name: 'ASHCO Energy Website',
-          ...formState,
-        }),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok || !data.success) {
-        throw new Error(data.message || 'Something went wrong. Please try again.');
+      if (!formState.name.trim() || !formState.phone.trim() || !formState.message.trim()) {
+        throw new Error('Please fill in your name, phone number and message.');
       }
 
+      const refId = `ASH-MSG-${Date.now().toString().slice(-6)}`;
+      const lines = [
+        `*New enquiry — Ashco Energy*`,
+        `Reference: ${refId}`,
+        `Name: ${formState.name}`,
+        formState.email ? `Email: ${formState.email}` : '',
+        `Phone: ${formState.phone}`,
+        formState.service ? `Interested in: ${formState.service}` : '',
+        `Message: ${formState.message}`,
+      ].filter(Boolean);
+
+      const waUrl = `https://wa.me/2349055000086?text=${encodeURIComponent(lines.join('\n'))}`;
+      window.open(waUrl, '_blank', 'noopener,noreferrer');
+
+      setReferenceId(refId);
       setIsSubmitted(true);
       setFormState({ name: '', email: '', phone: '', message: '', service: '' });
     } catch (err: any) {
@@ -235,8 +239,13 @@ const Contact = () => {
                 <p className="font-body text-sm text-gray-600 mb-3">
                   We'll get back to you within 24 hours.
                 </p>
+                {referenceId && (
+                  <div className="inline-flex items-center gap-2 bg-ashco-green/10 text-ashco-green text-xs font-body font-semibold px-4 py-2 rounded-full">
+                    Reference: {referenceId}
+                  </div>
+                )}
                 <button
-                  onClick={() => setIsSubmitted(false)}
+                  onClick={() => { setIsSubmitted(false); setReferenceId(null); }}
                   className="mt-6 font-body text-sm text-ashco-green underline hover:text-ashco-green-dark"
                 >
                   Send another message
@@ -336,6 +345,9 @@ const Contact = () => {
                   )}
                 </Button>
 
+                <p className="font-body text-xs text-gray-400 text-center">
+                  Your message is sent straight to our team on WhatsApp.
+                </p>
               </form>
             )}
           </div>

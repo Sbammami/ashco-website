@@ -1,4 +1,5 @@
-import { Facebook, Twitter, Instagram, Linkedin, ArrowUp, Fuel } from 'lucide-react';
+import { Facebook, Twitter, Instagram, Linkedin, ArrowUp, Fuel, Truck } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   const scrollToTop = () => {
@@ -35,19 +36,18 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
           {/* Company Info */}
           <div className="lg:col-span-1">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="relative w-14 h-14 bg-white rounded-lg p-1">
-                <img
-                  src="/logo.png"
-                  alt="Ashco Energy Logo"
-                  className="w-full h-full object-contain"
-                />
+            <div className="mb-6">
+              <div className="font-display text-3xl font-extrabold tracking-tight text-white">
+                ASHCO<span className="text-ashco-yellow"> ENERGY</span>
+              </div>
+              <div className="font-body text-sm font-semibold text-ashco-yellow mt-1">
+                We keep you going
               </div>
             </div>
             <p className="font-body text-sm text-white/70 leading-relaxed mb-6">
-              Ashco Energy Ltd. is a reliable petroleum supplier providing bulk
-              diesel solutions, POL distribution, and fuel services across
-              Nigeria.
+              Ashco Energy Ltd. delivers bulk diesel, petrol and kerosene to your
+              doorstep across Nigeria — order by the litre, pay a flat delivery
+              fee, and earn loyalty discounts every time you come back.
             </p>
             {/* Social Links */}
             <div className="flex gap-3">
@@ -70,6 +70,15 @@ const Footer = () => {
               QUICK LINKS
             </h3>
             <ul className="space-y-3">
+              <li>
+                <Link
+                  to="/order"
+                  className="font-body text-sm font-semibold text-ashco-yellow hover:text-white transition-colors duration-300 inline-flex items-center gap-2"
+                >
+                  <Truck className="w-4 h-4" />
+                  Order Fuel Now
+                </Link>
+              </li>
               {quickLinks.map((link, index) => (
                 <li key={index}>
                   <a
@@ -110,7 +119,8 @@ const Footer = () => {
               <div>
                 <p className="font-body text-sm text-white/50 mb-1">Address</p>
                 <p className="font-body text-sm text-white/70">
-                  Dantata & Sawoe Yard, Murtala Mohammed Expressway, Gudu, Abuja.
+                  02 Otunba Kayode Oke Close, Off Udo Udoma Street, Cadastral
+                  Zone AO4, Asokoro District, Abuja, FCT.
                 </p>
               </div>
               <div>

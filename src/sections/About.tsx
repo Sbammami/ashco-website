@@ -233,10 +233,10 @@ const About = () => {
               </p>
               <p className="font-body text-base text-gray-600 leading-relaxed">
                 We are a fully established organization with CAC accredited
-                certification and have been issued with a Department of Energy
-                wholesale fuel license by Standard Organization of Nigeria (SON).
-                Our strategic partnerships with TAJBank, ConOil Ltd, Mobil Ltd, and
-                A.A Rano ensure we deliver excellence at every step.
+                certification and a Department of Energy wholesale fuel license
+                issued by the Standard Organization of Nigeria (SON). From order
+                to delivery, we handle everything ourselves so you get fuel that's
+                clean, correctly measured and on time.
               </p>
             </div>
 
