@@ -175,7 +175,7 @@ const About = () => {
             >
               <img
                 src="/about-1.jpg"
-                alt="Mining truck refueling operation"
+                alt="ASHCO site engineer overseeing a fuel delivery"
                 className="w-full h-full object-cover"
               />
             </div>
@@ -188,7 +188,7 @@ const About = () => {
             >
               <img
                 src="/about-2.jpg"
-                alt="Industrial fueling station"
+                alt="Aerial view of bulk fuel storage tanks"
                 className="w-full h-full object-cover"
               />
             </div>

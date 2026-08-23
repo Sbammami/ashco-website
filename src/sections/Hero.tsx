@@ -113,7 +113,7 @@ const Hero = () => {
       >
         <img
           src="/hero-truck.jpg"
-          alt="Industrial mining truck at fueling station"
+          alt="Fuel tanker on the road delivering diesel to customers"
           className="w-full h-full object-cover"
         />
         {/* Gradient Overlay */}
