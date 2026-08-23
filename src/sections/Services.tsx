@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Fuel, Droplets, Warehouse, Truck, ClipboardCheck, ArrowRight } from 'lucide-react';
+import { Fuel, Warehouse, Truck, ClipboardCheck, ArrowRight } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -18,13 +18,6 @@ const Services = () => {
       description:
         'Reliable bulk diesel supply for industrial and commercial sectors. We ensure timely delivery with competitive pricing and quality assurance.',
       features: ['24/7 Supply', 'Quality Assured', 'Competitive Rates'],
-    },
-    {
-      icon: Droplets,
-      title: 'POL Distribution',
-      description:
-        'Comprehensive distribution of Petroleum, Oil, and Lubricants across all 36 states in Nigeria with our extensive logistics network.',
-      features: ['Nationwide Coverage', 'Safe Handling', 'Bulk Orders'],
     },
     {
       icon: Warehouse,

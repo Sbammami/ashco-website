@@ -227,7 +227,7 @@ const About = () => {
             <div ref={textRef} className="space-y-4 mb-8">
               <p className="font-body text-base text-gray-600 leading-relaxed">
                 Ashco Energy Ltd. is a reliable and highly dependable organization
-                that supplies petroleum, oil, lubricants (POL) and allied products
+                that supplies diesel, petrol, kerosene and allied products
                 to clients across all provinces of Nigeria including neighboring
                 countries.
               </p>

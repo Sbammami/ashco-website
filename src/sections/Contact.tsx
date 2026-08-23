@@ -297,7 +297,6 @@ const Contact = () => {
                     >
                       <option value="">Select a service...</option>
                       <option>Bulk Diesel Supply</option>
-                      <option>POL Distribution</option>
                       <option>Storage Solutions</option>
                       <option>Logistics Services</option>
                       <option>Fuel Consulting</option>

@@ -16,7 +16,6 @@ const Footer = () => {
 
   const services = [
     'Bulk Diesel Supply',
-    'POL Distribution',
     'Storage Solutions',
     'Logistics Services',
     'Fuel Consulting',
