@@ -188,7 +188,7 @@ const About = () => {
             >
               <img
                 src="/about-2.jpg"
-                alt="Aerial view of bulk fuel storage tanks"
+                alt="ASHCO tanker discharging fuel at a customer site"
                 className="w-full h-full object-cover"
               />
             </div>
