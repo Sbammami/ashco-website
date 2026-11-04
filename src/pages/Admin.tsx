@@ -2,9 +2,9 @@ import { useEffect, useState, useCallback } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
   Home, LogOut, Save, Loader2, ShieldAlert, Package, Check,
-  TrendingUp, Users, Fuel, ChevronDown, X, Eye, Search,
+  TrendingUp, Users, Fuel, X, Eye, Search,
   Truck, CheckCircle, Clock, AlertCircle, LayoutDashboard,
-  DollarSign, Settings,
+  DollarSign,
 } from 'lucide-react';
 import { useAuth } from '@/lib/auth';
 import { supabase, supabaseReady } from '@/lib/supabase';
